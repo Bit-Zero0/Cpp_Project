@@ -1,0 +1,6 @@
+到https://www.boost.org/下载文件，然后提取出来
+
+将 doc/html/目录中的所有 html文件 拷贝到此文件夹，文件有些大，这里就拷贝了
+ 
+可以使用该命令
+cp -rf boost_1_80_0/doc/html/* data/input/
