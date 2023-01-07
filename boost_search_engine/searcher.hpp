@@ -1,7 +1,8 @@
 #pragma once
 
-#include "index.hpp"
 #include <jsoncpp/json/json.h>
+#include "index.hpp"
+#include "log.hpp"
 
 namespace NS_search
 {
@@ -28,8 +29,11 @@ namespace NS_search
         {
             // 获取或者创建index对象
             index = NS_index::Index::GetInstance();
+			LOG(NORMAL, "获取index单例成功...");
 
+			// 根据index对象建立索引
             index->BuildIndex(input);
+			LOG(NORMAL, "建立正排和倒排索引成功...");
         }
 
         void Search(const std::string &query, std::string *json_string)

@@ -1,5 +1,6 @@
 #include "cpp-httplib/httplib.h"
 #include "searcher.hpp"
+#include "log.hpp"
 
 const std::string input = "data/raw_html/raw.txt";
 const std::string root_path = "./wwwroot";
@@ -20,13 +21,14 @@ int main()
                     return;
                 }
                 std::string word = req.get_param_value("word");
-                std::cout << "用户正在搜索：" << word << std::endl;
+                //std::cout << "用户正在搜索：" << word << std::endl;
+				LOG(NORMAL, "用户搜索的 " + word);
                 std::string json_string;
                 search.Search(word, &json_string);
                 resp.set_content(json_string, "application/json");
                 // resp.set_content("hello world!", "text/plain;charset=utf-8");
             });
-
+	LOG(NORMAL, "服务器启动成功...");
     svr.listen("0.0.0.0", 8076);
     return 0;
 }

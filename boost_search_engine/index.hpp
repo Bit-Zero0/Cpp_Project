@@ -8,6 +8,7 @@
 #include <mutex>
 
 #include "Util.hpp"
+#include "log.hpp"
 
 namespace NS_index
 {
@@ -53,11 +54,12 @@ namespace NS_index
         {
             if (nullptr == instance)
             {
-                std::unique_lock<std::mutex> lk(mtx);
+                mtx.lock();
                 if (nullptr == instance)
                 {
                     instance = new Index();
                 }
+                mtx.unlock()
             }
 
             return instance;
@@ -108,6 +110,8 @@ namespace NS_index
                 }
 
                 BuildInvertedIndex(*doc);
+				count++;
+                LOG(NORMAL, "当前已经建立的索引文档" + std::to_string(count));
             }
             return true;
         }
